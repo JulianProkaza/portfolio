@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="../assets/case-studies.css">
   <meta name="description" content="Short case study showcasing project outcomes with screenshots and concise explanations.">
 
-  <!-- Define asset folder here -->
+  <!-- Set this per project -->
   <style>
     :root {
-      --asset-path: "../assets/mae"; /* change per project */
+      --asset-path: "../assets/mae"; /* e.g. ../assets/figma for another project */
     }
   </style>
 </head>
@@ -35,7 +35,7 @@
       <p><strong>Outcome:</strong> High-level result or learning (keep it short).</p>
     </section>
 
-    <!-- Example content blocks -->
+    <!-- Repeatable blocks -->
     <section class="section">
       <figure class="media figure">
         <img src="" data-img="mae-step-01.png" alt="Describe the screenshot accessibly">
@@ -43,7 +43,8 @@
       </figure>
       <div class="copy">
         <h3>What’s happening here</h3>
-        <p>Explain the change, the decision, or the design pattern. Keep it short.</p>
+        <p>Explain the change, the decision, or the design pattern. Keep it to 2–4 short sentences.</p>
+        <p class="caption">Why it matters: a concise note on impact or rationale.</p>
       </div>
     </section>
 
@@ -58,19 +59,54 @@
       </div>
     </section>
 
+    <section class="section full">
+      <figure class="media figure">
+        <img src="" data-img="mae-overview.png" alt="Full journey overview">
+        <figcaption class="caption">Optional full-width visual.</figcaption>
+      </figure>
+    </section>
+
     <footer class="footer">
       <p>Private case study — requires direct link. Not indexed.</p>
     </footer>
   </main>
 
-  <!-- 👇 Tiny inline script builds the full image paths automatically -->
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close" id="lightboxClose">&times;</span>
+    <img src="" alt="">
+  </div>
+
   <script>
+    // Resolve image paths based on the asset folder variable
     document.querySelectorAll('img[data-img]').forEach(img => {
       const base = getComputedStyle(document.documentElement)
         .getPropertyValue('--asset-path')
         .trim()
         .replace(/["']/g, '');
       img.src = `${base}/${img.dataset.img}`;
+    });
+
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn = document.getElementById('lightboxClose');
+
+    document.querySelectorAll('.media img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lightboxImg.src = img.src;
+        lightbox.classList.add('active');
+      });
+    });
+
+    const closeLightbox = () => lightbox.classList.remove('active');
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 </body>
