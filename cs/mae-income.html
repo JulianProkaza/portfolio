@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Project title — Case study</title>
+  <link rel="stylesheet" href="../assets/case-studies.css">
+  <meta name="description" content="Short case study showcasing project outcomes with screenshots and concise explanations.">
+
+  <!-- Set this per project -->
+  <style>
+    :root {
+      /* e.g. ../assets/figma for another project */
+      --asset-path: "../assets/mae-income";
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Mortgage Application Experience</h1>
+      <p class="summary">Reducing complexity when capturing income</p>
+      <div class="tags">
+        <span class="tag">UX writing</span>
+        <span class="tag">Design systems</span>
+        <span class="tag">Accessibility</span>
+      </div>
+    </header>
+
+    <section class="intro">
+      <p><strong>Context:</strong> 1–2 sentences on what this was and who it was for.</p>
+      <p><strong>Role:</strong> Your responsibilities and scope.</p>
+      <p><strong>Outcome:</strong> High-level result or learning (keep it short).</p>
+    </section>
+
+    <!-- Repeatable blocks -->
+    <section class="section">
+      <figure class="media figure">
+        <img src="" data-img="original-design.png" alt="Describe the screenshot accessibly">
+        <figcaption class="caption">Optional short caption explaining the view.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>What’s happening here</h3>
+        <p>Explain the change, the decision, or the design pattern. Keep it to 2–4 short sentences.</p>
+        <p class="caption">Why it matters: a concise note on impact or rationale.</p>
+      </div>
+    </section>
+
+    <section class="section reverse">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-02.png" alt="Describe the screenshot accessibly">
+        <figcaption class="caption">Optional short caption.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>Another key step</h3>
+        <p>Explain the user journey step, the content model, or the interaction here.</p>
+      </div>
+    </section>
+
+    <section class="section full">
+      <figure class="media figure">
+        <img src="" data-img="mae-overview.png" alt="Full journey overview">
+        <figcaption class="caption">Optional full-width visual.</figcaption>
+      </figure>
+    </section>
+
+    <footer class="footer">
+      <p>Private case study — requires direct link. Not indexed.</p>
+    </footer>
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</span>
+    <button class="lightbox-btn" id="lightboxPrev" aria-label="Previous">&#10094;</button>
+    <img src="" alt="">
+    <span class="lightbox-count" id="lightboxCount"></span>
+    <button class="lightbox-btn" id="lightboxNext" aria-label="Next">&#10095;</button>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    /* 1) Resolve image paths from the asset folder variable */
+    document.querySelectorAll('img[data-img]').forEach(img => {
+      const base = getComputedStyle(document.documentElement)
+        .getPropertyValue('--asset-path')
+        .trim()
+        .replace(/["']/g, '');
+      img.src = `${base}/${img.dataset.img}`;
+    });
+
+    /* 2) Lightbox with keyboard, swipe, and counter */
+    const lightbox    = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn    = document.getElementById('lightboxClose');
+    const prevBtn     = document.getElementById('lightboxPrev');
+    const nextBtn     = document.getElementById('lightboxNext');
+    const counterEl   = document.getElementById('lightboxCount');
+    const gallery     = Array.from(document.querySelectorAll('.media img'));
+    let current = -1;
+
+    function updateCounter() {
+      if (counterEl) counterEl.textContent = `${current + 1} / ${gallery.length}`;
+    }
+
+    function openAt(index) {
+      current = (index + gallery.length) % gallery.length;
+      lightboxImg.src = gallery[current].src;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      updateCounter();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    function showNext(step = 1) { openAt(current + step); }
+
+    // Open handlers
+    gallery.forEach((img, i) => {
+      img.addEventListener('click', () => openAt(i));
+    });
+
+    // Buttons
+    prevBtn.addEventListener('click', () => showNext(-1));
+    nextBtn.addEventListener('click', () => showNext(1));
+    closeBtn.addEventListener('click', closeLightbox);
+
+    // Backdrop click closes
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    // Keyboard
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext(1);
+      if (e.key === 'ArrowLeft') showNext(-1);
+    });
+
+    // Touch swipe
+    let touchStartX = 0, touchStartY = 0, touching = false;
+    const SWIPE_THRESHOLD = 50; // px
+
+    lightbox.addEventListener('touchstart', e => {
+      if (!lightbox.classList.contains('active')) return;
+      const t = e.changedTouches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touching = true;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', e => {
+      if (!touching) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      touching = false;
+
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) showNext(1); else showNext(-1);
+    }, { passive: true });
+  </script>
+</body>
+</html>
