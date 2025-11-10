@@ -1,10 +1,10 @@
-/* case-studies.css — minimal, clean, accessible */
+/* case-studies.css — aligned with holding page palette */
 :root{
   --bg:#ffffff;
-  --fg:#111111;
+  --fg:#222222;
   --muted:#666666;
-  --border:#e6e6e6;
-  --accent:#0a0a0a;
+  --border:#dddddd;
+  --accent:#0a2463; /* dark blue accent from holding page */
   --maxw: 1000px;
   --radius: 14px;
   --shadow: 0 2px 20px rgba(0,0,0,0.06);
@@ -15,10 +15,17 @@ html,body{margin:0;padding:0}
 body{
   background:var(--bg);
   color:var(--fg);
-  font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+  font-family:'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   line-height:1.55;
   -webkit-font-smoothing:antialiased;
 }
+
+a{
+  color:var(--accent);
+  text-decoration:none;
+  transition:color 0.2s ease;
+}
+a:hover{color:#03194d;}
 
 .container{
   max-width:var(--maxw);
@@ -34,6 +41,7 @@ body{
   font-size:clamp(28px, 5vw, 40px);
   line-height:1.15;
   letter-spacing:-0.01em;
+  color:var(--accent);
 }
 .header p{
   margin:6px 0 0 0;
@@ -50,7 +58,8 @@ body{
   padding:4px 8px;
   border:1px solid var(--border);
   border-radius:999px;
-  color:#333;
+  color:var(--accent);
+  background:#f5f7fb;
 }
 
 .intro{
@@ -58,7 +67,7 @@ body{
   border-bottom:1px solid var(--border);
   padding:18px 0;
   margin-bottom:32px;
-  color:#2a2a2a;
+  color:#333;
 }
 
 .section{
@@ -97,13 +106,10 @@ body{
 .copy h3{
   margin:0 0 8px 0;
   font-size:20px;
+  color:var(--accent);
 }
 .copy p{
   margin:0 0 10px 0;
-}
-
-.figure{
-  margin:0;
 }
 
 .footer{
