@@ -73,9 +73,9 @@ a:hover { color:#03194d; }
 .section.reverse { direction:rtl; }
 .section.reverse > * { direction:ltr; }
 
-/* --- Updated media block (fix caption clipping) --- */
+/* Media block (fixed caption clipping) */
 .media {
-  overflow:visible; /* allow caption to flow freely */
+  overflow:visible;
   border:0;
   box-shadow:none;
   background:transparent;
@@ -93,18 +93,17 @@ a:hover { color:#03194d; }
   max-height:90vh;
   object-fit:contain;
   cursor:zoom-in;
+  margin-bottom:12px;
 }
 
-.caption {
+.media .caption,
+.figure .caption {
   font-size:14px;
   color:var(--muted);
-  margin-top:10px;
-}
-
-/* Optional subtle divider below each figure */
-.media {
-  border-bottom:1px solid var(--border);
-  padding-bottom:8px;
+  margin-top:0;
+  padding:0 2px;
+  position:relative;
+  z-index:1;
 }
 
 /* Copy blocks */
@@ -115,12 +114,21 @@ a:hover { color:#03194d; }
 }
 .copy p { margin:0 0 10px 0; }
 
-/* Optional full-width image block */
-.section.full { grid-template-columns:1fr; }
-.section.full .media img {
-  max-width:700px;
-  margin:0 auto;
-  display:block;
+/* Conclusion section */
+.conclusion {
+  border-top:1px solid var(--border);
+  margin-top:48px;
+  padding-top:24px;
+  color:var(--fg);
+}
+.conclusion h3 {
+  font-size:20px;
+  color:var(--accent);
+  margin-bottom:12px;
+}
+.conclusion p {
+  margin:0 0 14px 0;
+  max-width:70ch;
 }
 
 /* Footer */
@@ -134,109 +142,74 @@ a:hover { color:#03194d; }
 
 /* --- Image lightbox --- */
 .lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.25s ease;
 }
 .lightbox.active {
-  opacity: 1;
-  pointer-events: auto;
+  opacity:1;
+  pointer-events:auto;
 }
 .lightbox img {
-  max-width: 90vw;
-  max-height: 90vh;
-  border-radius: 10px;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  max-width:90vw;
+  max-height:90vh;
+  border-radius:10px;
+  box-shadow:0 4px 30px rgba(0,0,0,0.5);
 }
 .lightbox-close {
-  position: fixed;
-  top: 20px;
-  right: 30px;
-  font-size: 28px;
-  color: #fff;
-  cursor: pointer;
-  line-height: 1;
+  position:fixed;
+  top:20px;
+  right:30px;
+  font-size:28px;
+  color:#fff;
+  cursor:pointer;
+  line-height:1;
 }
 
 /* Lightbox controls */
 .lightbox-btn {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 26px;
-  color: #fff;
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 999px;
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  user-select: none;
+  position:fixed;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:26px;
+  color:#fff;
+  background:rgba(0,0,0,0.35);
+  border:1px solid rgba(255,255,255,0.25);
+  border-radius:999px;
+  width:44px;
+  height:44px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  user-select:none;
 }
-.lightbox-btn:hover { background: rgba(0,0,0,0.5); }
-#lightboxPrev { left: 20px; }
-#lightboxNext { right: 20px; }
+.lightbox-btn:hover { background:rgba(0,0,0,0.5); }
+#lightboxPrev { left:20px; }
+#lightboxNext { right:20px; }
 
 /* Lightbox image counter */
 .lightbox-count {
-  position: fixed;
-  bottom: 20px;
-  right: 30px;
-  font-size: 14px;
-  color: rgba(255,255,255,0.85);
-  background: rgba(0,0,0,0.4);
-  padding: 4px 10px;
-  border-radius: 6px;
-  letter-spacing: 0.5px;
-  user-select: none;
+  position:fixed;
+  bottom:20px;
+  right:30px;
+  font-size:14px;
+  color:rgba(255,255,255,0.85);
+  background:rgba(0,0,0,0.4);
+  padding:4px 10px;
+  border-radius:6px;
+  letter-spacing:0.5px;
+  user-select:none;
 }
 
 @media (max-width:900px) {
   .section { grid-template-columns:1fr; }
-  .lightbox img { max-width: 94vw; max-height: 84vh; }
-  #lightboxPrev, #lightboxNext { width: 40px; height: 40px; }
+  .lightbox img { max-width:94vw; max-height:84vh; }
+  #lightboxPrev, #lightboxNext { width:40px; height:40px; }
 }
-
-/* --- Caption/thumbnail separation override --- */
-.media {
-  overflow: visible !important;      /* never clip the caption */
-  border: 0 !important;              /* remove any container border */
-  box-shadow: none !important;       /* shadow on image only */
-  background: transparent !important;
-  border-radius: 0 !important;
-  padding-bottom: 0 !important;      /* kill the subtle divider */
-}
-
-.media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  background: #fafafa;
-  max-height: 90vh;
-  object-fit: contain;
-  cursor: zoom-in;
-  margin-bottom: 12px;               /* explicit gap below the rounded corners */
-}
-
-.media .caption,
-.figure .caption {
-  margin-top: 0;                     /* handled by img margin-bottom */
-  padding: 0 2px;                    /* tiny inset to avoid corner collision */
-  position: relative;
-  z-index: 1;                        /* ensure it never tucks under the image */
-}
-
-/* If your browser collapses margins oddly, this forces clean layout */
-.media { contain: content; }
