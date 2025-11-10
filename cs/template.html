@@ -60,11 +60,18 @@
       </div>
     </section>
 
-    <section class="section full">
-      <figure class="media figure">
-        <img src="" data-img="mae-overview.png" alt="Full journey overview">
-        <figcaption class="caption">Optional full-width visual.</figcaption>
-      </figure>
+    <!-- Final wrap-up -->
+    <section class="conclusion">
+      <h3>Outcomes and impact</h3>
+      <p>
+        Summarise measurable results, insights, or lessons learned here.
+        Mention quantitative outcomes (e.g. completion time, error rate, satisfaction scores)
+        and qualitative takeaways about process or collaboration.
+      </p>
+      <p>
+        Keep it conversational but concise — 2–3 short paragraphs max.
+        You can include bolded key metrics or short lists if useful.
+      </p>
     </section>
 
     <footer class="footer">
@@ -121,22 +128,11 @@
 
     function showNext(step = 1) { openAt(current + step); }
 
-    // Open handlers
-    gallery.forEach((img, i) => {
-      img.addEventListener('click', () => openAt(i));
-    });
-
-    // Buttons
+    gallery.forEach((img, i) => { img.addEventListener('click', () => openAt(i)); });
     prevBtn.addEventListener('click', () => showNext(-1));
     nextBtn.addEventListener('click', () => showNext(1));
     closeBtn.addEventListener('click', closeLightbox);
-
-    // Backdrop click closes
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) closeLightbox();
-    });
-
-    // Keyboard
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener('keydown', e => {
       if (!lightbox.classList.contains('active')) return;
       if (e.key === 'Escape') closeLightbox();
@@ -144,10 +140,9 @@
       if (e.key === 'ArrowLeft') showNext(-1);
     });
 
-    // Touch swipe
+    /* Touch swipe */
     let touchStartX = 0, touchStartY = 0, touching = false;
     const SWIPE_THRESHOLD = 50; // px
-
     lightbox.addEventListener('touchstart', e => {
       if (!lightbox.classList.contains('active')) return;
       const t = e.changedTouches[0];
@@ -155,14 +150,12 @@
       touchStartY = t.clientY;
       touching = true;
     }, { passive: true });
-
     lightbox.addEventListener('touchend', e => {
       if (!touching) return;
       const t = e.changedTouches[0];
       const dx = t.clientX - touchStartX;
       const dy = t.clientY - touchStartY;
       touching = false;
-
       if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
       if (dx < 0) showNext(1); else showNext(-1);
     }, { passive: true });
