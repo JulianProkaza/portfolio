@@ -205,3 +205,38 @@ a:hover { color:#03194d; }
   .lightbox img { max-width: 94vw; max-height: 84vh; }
   #lightboxPrev, #lightboxNext { width: 40px; height: 40px; }
 }
+
+/* --- Caption/thumbnail separation override --- */
+.media {
+  overflow: visible !important;      /* never clip the caption */
+  border: 0 !important;              /* remove any container border */
+  box-shadow: none !important;       /* shadow on image only */
+  background: transparent !important;
+  border-radius: 0 !important;
+  padding-bottom: 0 !important;      /* kill the subtle divider */
+}
+
+.media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: #fafafa;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: zoom-in;
+  margin-bottom: 12px;               /* explicit gap below the rounded corners */
+}
+
+.media .caption,
+.figure .caption {
+  margin-top: 0;                     /* handled by img margin-bottom */
+  padding: 0 2px;                    /* tiny inset to avoid corner collision */
+  position: relative;
+  z-index: 1;                        /* ensure it never tucks under the image */
+}
+
+/* If your browser collapses margins oddly, this forces clean layout */
+.media { contain: content; }
