@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="googlebot" content="noindex, nofollow">
+  <title>Mortgage Application Experience — Case study</title>
+  <link rel="stylesheet" href="../assets/case-studies.css">
+  <meta name="description" content="A small but revealing UX/content design example: changing a single button label exposed policy, behaviour and system implications in a mortgage journey.">
+
+  <!-- Set this per project -->
+  <style>
+    :root {
+      --asset-path: "../assets/mae";
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Mortgage Application Experience</h1>
+      <p class="summary">A tiny label change with big implications for behaviour, compliance and system design.</p>
+      <div class="tags">
+        <span class="tag">Content design</span>
+        <span class="tag">UX writing</span>
+        <span class="tag">Compliance</span>
+      </div>
+    </header>
+
+    <section class="intro">
+      <p><strong>Context:</strong> A Mortgage Information Sheet (MIS) is a regulated document that summarises the main features, terms and costs of a proposed mortgage. In the broker journey I worked on, the MIS had to be shared with the client at a specific point. A late change to how it was handled introduced compliance and usability issues that couldn’t be solved with a simple wording update.</p>
+      <p><strong>Role:</strong> I was the sole content designer, responsible for the wider mortgage journey of which this pattern was one small part.</p>
+      <p><strong>Outcome:</strong> The build was updated so the interface matched the underlying logic, and users couldn’t progress without viewing the MIS – removing the policy risk while keeping the experience clear and simple.</p>
+    </section>
+
+    <!-- 1. Original design -->
+    <section class="section">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-01.png" alt="Screen with a ‘Download MIS’ button; the document is pre-generated in the background and offered as a PDF download.">
+        <figcaption class="caption">Original approach: pre-generate the MIS and offer it as a PDF download.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>1. Original design</h3>
+        <p>The MIS was automatically created in the background and offered as a PDF download. This breached Barclays’ policy – the document should only be created on demand, for viewing on-screen or printing.</p>
+        <p class="caption">Why it matters: the label ‘Download’ no longer matched what the system should do, so it had to change.</p>
+      </div>
+    </section>
+
+    <!-- 2. Policy change -->
+    <section class="section reverse">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-02.png" alt="UI showing a ‘View MIS’ button replacing ‘Download MIS’.">
+        <figcaption class="caption">Policy-aligned label, but behaviour also changed.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>2. Policy change</h3>
+        <p>Stakeholders suggested switching ‘Download’ to ‘View’. But the MIS was no longer pre-created – ‘View’ now triggered an API call to generate the document. Viewing was also now mandatory, not optional.</p>
+        <p class="caption">Why it matters: a label change alone didn’t reflect the new behaviour or prevent users moving on without viewing the MIS.</p>
+      </div>
+    </section>
+
+    <!-- 3. Showing system status -->
+    <section class="section">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-03.png" alt="After clicking ‘View MIS’, a confirmation toast appears as the MIS opens in a new background tab.">
+        <figcaption class="caption">Explicit confirmation when the MIS is generated and opened.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>3. Showing system status</h3>
+        <p>Because the preview opened in a new browser tab (often in the background), users needed clear feedback that the MIS had been created successfully.</p>
+        <p class="caption">Why it matters: without confirmation, users might think nothing happened – breaking visibility of system status.</p>
+      </div>
+    </section>
+
+    <!-- 4. Managing failure gracefully -->
+    <section class="section reverse">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-04.png" alt="An inline error message explains that the MIS could not be generated and offers a clear next step to retry.">
+        <figcaption class="caption">Clear error handling with next steps when the API fails.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>4. Managing failure gracefully</h3>
+        <p>If the API call failed, users had to know. Otherwise they’d click ‘View’, see nothing, and waste time hunting through tabs.</p>
+        <p class="caption">Why it matters: good UX means telling users when something’s gone wrong and what to do next.</p>
+      </div>
+    </section>
+
+    <!-- 5. Enforcing mandatory creation -->
+    <section class="section">
+      <figure class="media figure">
+        <img src="" data-img="mae-step-05.png" alt="‘Continue’ button disabled until the MIS has been opened; helper text explains that viewing the MIS is required.">
+        <figcaption class="caption">Progress is blocked until the MIS has been viewed.</figcaption>
+      </figure>
+      <div class="copy">
+        <h3>5. Enforcing mandatory creation</h3>
+        <p>Sharing the MIS was compulsory. Relying on a label or message wasn’t enough, so the journey blocked progress until the MIS had been opened.</p>
+        <p class="caption">Why it matters: this ensured compliance and a clear user flow.</p>
+      </div>
+    </section>
+
+    <!-- Final wrap-up -->
+    <section class="conclusion">
+      <h3>Outcomes and impact</h3>
+      <p>Tracing the knock-on effects of a ‘simple’ change is core to content design. Without that, user experience – and in this case, compliance – can easily suffer.</p>
+      <p>This small example shows how content design connects language, behaviour and policy, making sure the system does what the words say – and the words describe what the system actually does.</p>
+    </section>
+
+    <footer class="footer">
+      <p>Private case study — requires direct link. Not indexed.</p>
+    </footer>
+  </main>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <span class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</span>
+    <button class="lightbox-btn" id="lightboxPrev" aria-label="Previous">&#10094;</button>
+    <img src="" alt="">
+    <span class="lightbox-count" id="lightboxCount"></span>
+    <button class="lightbox-btn" id="lightboxNext" aria-label="Next">&#10095;</button>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    /* 1) Resolve image paths from the asset folder variable */
+    document.querySelectorAll('img[data-img]').forEach(img => {
+      const base = getComputedStyle(document.documentElement)
+        .getPropertyValue('--asset-path')
+        .trim()
+        .replace(/["']/g, '');
+      img.src = `${base}/${img.dataset.img}`;
+    });
+
+    /* 2) Lightbox with keyboard, swipe, and counter */
+    const lightbox    = document.getElementById('lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeBtn    = document.getElementById('lightboxClose');
+    const prevBtn     = document.getElementById('lightboxPrev');
+    const nextBtn     = document.getElementById('lightboxNext');
+    const counterEl   = document.getElementById('lightboxCount');
+    const gallery     = Array.from(document.querySelectorAll('.media img'));
+    let current = -1;
+
+    function updateCounter() {
+      if (counterEl) counterEl.textContent = `${current + 1} / ${gallery.length}`;
+    }
+
+    function openAt(index) {
+      current = (index + gallery.length) % gallery.length;
+      lightboxImg.src = gallery[current].src;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      updateCounter();
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    function showNext(step = 1) { openAt(current + step); }
+
+    gallery.forEach((img, i) => { img.addEventListener('click', () => openAt(i)); });
+    prevBtn.addEventListener('click', () => showNext(-1));
+    nextBtn.addEventListener('click', () => showNext(1));
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext(1);
+      if (e.key === 'ArrowLeft') showNext(-1);
+    });
+
+    /* Touch swipe */
+    let touchStartX = 0, touchStartY = 0, touching = false;
+    const SWIPE_THRESHOLD = 50; // px
+    lightbox.addEventListener('touchstart', e => {
+      if (!lightbox.classList.contains('active')) return;
+      const t = e.changedTouches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touching = true;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', e => {
+      if (!touching) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      touching = false;
+      if (Math.abs(dx) < SWIPE_THRESHOLD || Math.abs(dx) < Math.abs(dy)) return;
+      if (dx < 0) showNext(1); else showNext(-1);
+    }, { passive: true });
+  </script>
+</body>
+</html>
