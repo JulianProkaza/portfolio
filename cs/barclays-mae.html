@@ -10,29 +10,6 @@
   <meta name="description" content="Overview of the Mortgage Application Experience (MAE) redesign, with embedded posts and links to detailed case studies.">
   <style>
     .intro p { max-width: 70ch; }
-    .linkedin-embeds {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin: 32px 0;
-    }
-    iframe {
-      width: 100%;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      background: #fafafa;
-    }
-    .case-links {
-      border-top: 1px solid var(--border);
-      margin-top: 40px;
-      padding-top: 24px;
-    }
-    .case-links a {
-      display: inline-block;
-      margin-right: 20px;
-      font-weight: 600;
-    }
   </style>
 </head>
 
@@ -52,17 +29,20 @@
     </section>
 
     <section class="linkedin-embeds">
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7359137905232990210?collapsed=1"
-              height="550" frameborder="0" allowfullscreen=""
-              title="Embedded post 1"></iframe>
+      <div class="embed-wrap">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7359137905232990210?collapsed=1"
+                allowfullscreen title="Embedded post 1"></iframe>
+      </div>
 
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7364272598014173184?collapsed=1"
-              height="568" frameborder="0" allowfullscreen=""
-              title="Embedded post 2"></iframe>
+      <div class="embed-wrap">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7364272598014173184?collapsed=1"
+                allowfullscreen title="Embedded post 2"></iframe>
+      </div>
 
-      <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7366440003528192000?collapsed=1"
-              height="600" frameborder="0" allowfullscreen=""
-              title="Embedded post 3"></iframe>
+      <div class="embed-wrap">
+        <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7366440003528192000?collapsed=1"
+                allowfullscreen title="Embedded post 3"></iframe>
+      </div>
     </section>
 
     <section class="case-links">
