@@ -301,9 +301,9 @@ a:hover { color: #03194d; }
 /* More about MAE — secondary section */
 .linkedin-section.bordered {
   border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  /* removed bottom border to prevent double line */
   padding: 28px 0;
-  margin: 40px 0;
+  margin: 40px 0 24px;
 }
 .linkedin-section h3 {
   font-size: 18px;
