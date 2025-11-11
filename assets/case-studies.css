@@ -221,13 +221,13 @@ a:hover { color: #03194d; }
   display: block;
 }
 
-/* Per-embed utilities */
+/* Embed utilities */
 .embed--portrait { aspect-ratio: 4 / 5 !important; }
 .embed--tall { aspect-ratio: 3 / 4 !important; }
 .embed--square { aspect-ratio: 1 / 1 !important; }
 .embed--wide { aspect-ratio: 16 / 9 !important; }
 
-/* MAE overview — cards and headings */
+/* MAE overview — cards */
 .case-links {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
@@ -283,15 +283,15 @@ a:hover { color: #03194d; }
   color: var(--muted);
 }
 
-/* --- Section style variants (for MAE overview) --- */
+/* --- Section style variants and heading hierarchy --- */
 
-/* Explore the case studies — main section */
+/* Explore the case studies — main callout */
 .case-links.simple {
   border: none;
   padding: 16px 0 8px;
   margin: 32px 0 24px;
 }
-.case-links.simple h3 {
+.case-links h3 {
   font-size: 22px;
   color: var(--accent);
   margin: 0 0 12px;
@@ -305,7 +305,7 @@ a:hover { color: #03194d; }
   padding: 28px 0;
   margin: 40px 0;
 }
-.linkedin-section.bordered h3 {
+.linkedin-section h3 {
   font-size: 18px;
   color: var(--fg);
   margin: 0 0 12px;
