@@ -10,6 +10,52 @@
   <meta name="description" content="Overview of the Mortgage Application Experience (MAE) redesign, with embedded posts and links to detailed case studies.">
   <style>
     .intro p { max-width: 70ch; }
+    /* Simple visual cards for the two case-study links */
+    .case-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 24px 0 8px;
+    }
+    .case-card {
+      display: block;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px;
+      text-decoration: none;
+      color: var(--fg);
+      background: #fff;
+      box-shadow: var(--shadow);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .case-card:hover { transform: translateY(-2px); }
+    .case-card figure {
+      margin: 0 0 10px 0;
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      align-items: center;
+    }
+    .case-card img {
+      width: 72px; height: 72px;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fafafa;
+      display: block;
+    }
+    .case-card h4 {
+      margin: 0;
+      font-size: 16px;
+      color: var(--accent);
+      letter-spacing: -0.01em;
+    }
+    .case-card p {
+      margin: 6px 0 0 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .case-links { border-top: 1px solid var(--border); padding-top: 20px; margin-top: 24px; }
   </style>
 </head>
 
@@ -17,17 +63,48 @@
   <main class="container">
     <header class="header">
       <h1>Mortgage Application Experience (MAE)</h1>
-      <p class="summary">End-to-end redesign of broker, adviser and customer journeys for mortgages.</p>
+      <p class="summary">Simplifying every step of the mortgage journey for brokers, advisers and customers.</p>
     </header>
 
     <section class="intro">
       <p>
-        The Mortgage Application Experience (MAE) programme was a multi-year rebuild of Barclays’ mortgage journeys —
-        improving clarity, speed, and trust across adviser, broker, and customer experiences.
-        This overview introduces the work and shares detailed case studies covering the design and content strategy behind it.
+        The Mortgage Application Experience (MAE) is a multi-year rebuild of Barclays’ digital mortgage platform – transforming how brokers and advisers manage applications from first quote to final offer.
+      </p>
+      <p>
+        As Content Design Lead, I shaped how the language, logic and structure work together – creating reusable patterns for complex financial rules, simplifying eligibility and income checks, and designing error and help content that guides users with clarity and confidence. Working closely with designers and developers, I used content design to make automation and policy logic feel effortless for the user.
+      </p>
+      <p>
+        The results were clear. Application times dropped from nearly an hour to under 15 minutes. Referrals to underwriters fell sharply thanks to clearer guidance and automated checks. The platform, now used by all 26,000 brokers, has seen satisfaction move from deeply negative to strongly positive – the highest levels ever recorded in broker surveys – and has helped drive record lending volumes.
       </p>
     </section>
 
+    <!-- Visual links to the two hidden case studies -->
+    <section class="case-links">
+      <h3>Explore the case studies</h3>
+      <div class="case-grid">
+        <a class="case-card" href="./mae-income.html">
+          <figure>
+            <img src="../assets/mae/thumb-income.png" alt="Thumbnail: income and eligibility flow">
+            <figcaption>
+              <h4>MAE — Application journey</h4>
+              <p>How we simplified income, eligibility and evidence steps to cut completion time and reduce referrals.</p>
+            </figcaption>
+          </figure>
+        </a>
+
+        <a class="case-card" href="./mis-pdf.html">
+          <figure>
+            <img src="../assets/mae/thumb-governance.png" alt="Thumbnail: Figma governance patterns">
+            <figcaption>
+              <h4>MAE — Figma governance & design ops</h4>
+              <p>Reusable patterns, naming, and content models that kept teams aligned across a complex platform.</p>
+            </figcaption>
+          </figure>
+        </a>
+      </div>
+    </section>
+
+    <!-- Embedded LinkedIn posts -->
     <section class="linkedin-embeds">
       <div class="embed-wrap">
         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7359137905232990210?collapsed=1"
@@ -43,15 +120,6 @@
         <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:share:7366440003528192000?collapsed=1"
                 allowfullscreen title="Embedded post 3"></iframe>
       </div>
-    </section>
-
-    <section class="case-links">
-      <h3>Explore the case studies</h3>
-      <p>Select a focus area for a deeper look:</p>
-      <p>
-        <a href="./mae-income.html">MAE — Application journey</a>
-        <a href="./mis-pdf.html">MAE — Figma governance & design ops</a>
-      </p>
     </section>
 
     <footer class="footer">
